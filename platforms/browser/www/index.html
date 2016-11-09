@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="cordova.js"></script>	
+<script src="assets/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="assets/js/app.js"></script>
+	
+<!-- jQuery Mobile -->
+<link rel="stylesheet" href="assets/jquery_mobile/themes/jquery.mobile.icons.min.css" />
+<link rel="stylesheet" href="assets/jquery_mobile/themes/jquery.mobile.structure-1.4.5.min.css" />
+<script src="assets/jquery_mobile/themes/jquery.mobile-1.4.5.min.js"></script>
+
+
+<!-- Materialize -->
+<link rel="stylesheet" href="assets/materialize/css/materialize.min.css">
+<script src="assets/materialize/js/materialize.min.js"></script>
+
+<!-- Custom -->
+<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head>
+<body>
+
+
+
+
+<nav id="primaryMenu" class=" orange lighten-1"></nav>
+      
+<div class="loading-item emptyCss"></div>
+<!-- Index -->
+<div data-role="page" id="HomePage">
+	<div class="nav-wrapper headingPage">
+		<div class="iconMenu">
+			<a href="#" data-activates="mobile-demo" class="button-collapse" id="iconActiveMenu"><i class="material-icons">menu</i></a>	
+		</div>
+		<div class="titlePage">
+			<a href="#!" class="brand-logo">Departamentos</a>
+		</div>
+        <div class="iconRight">
+			<a href="#HomePage" data-activates="mobile-demo" ><i class="material-icons">loop</i></a>	
+		</div>
+	</div>
+
+	<div role="main" class="ui-content">  
+
+		<div id="listado_departamento"></div>
+	</div>
+</div>
+
+<!-- Opciones de Clientes -->
+<div data-role="page" id="FormClient">
+	<div class="nav-wrapper headingPage">
+		<div class="iconMenu">
+			<a href="#" data-activates="mobile-demo" class="button-collapse" id="iconActiveMenu"><i class="material-icons">menu</i></a>	
+		</div>
+		<div class="titlePage">
+			<a href="#!" class="brand-logo">Clientes</a>
+		</div>
+	</div>
+
+	<div role="main" class="ui-content">
+		<form id="formNewClient" action="#" method="post">
+		    <h4 class="titleLote" style="margin-top: 20px">Datos de la Persona</h4>
+		        <div class="row">
+		            <div class="input-field col s12">
+		                
+		                <label for="cedula:">Cédula: </label>
+		                <input id="cedula" type="text">
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="input-field col s12">
+		                <label for="nombres:">Nombres: </label>
+		                <input id="nombres" type="text" value="">
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="input-field col s12">
+		            <input id="apellido" type="text" >
+		            <label for="apellidos">Apellidos: </label>
+		            </div>
+		        </div>
+
+		        <!-- Datos de la ubicacion -->
+		        <h4 class="titleLote">Datos de Ubicación</h4>
+		        <div class="row">
+		            <div class="input-field col s12">
+		                <label for="dirParticular">Dirección Particular: </label>
+		                <textarea id="dirParticular" class="materialize-textarea"></textarea>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="input-field col s12">
+		                <label for="tel:">Teléfono: </label>
+		                <input id="tel" type="text" >
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="input-field col s12">
+		                <label for="cel:">Celular: </label>
+		                <input id="cel" type="text" >
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="input-field col s12">
+		                <label for="email:">Email: </label>
+		                <input id="email" type="email" required="yes">
+		            </div>
+		        </div>
+		    
+		        <!-- Datos del trabajo  -->
+		        <h4 class="titleLote">Datos Laborales</h4>
+		        <div class="row">
+		            <div class="input-field col s12">
+		                <label for="empresa:">Trabaja en: </label>
+		                <input id="empresa" type="text" >
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="input-field col s12">
+		                <textarea id="dirLaboral" class="materialize-textarea"></textarea>
+		                <label for="dirLaboral">Dirección Laboral: </label>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="input-field col s12">
+		                <label for="telLaboral:">Teléfono Laboral: </label>
+		                <input id="telLaboral" type="text" >
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="input-field col s12">
+		                <label for="telFax:">Teléfono Fax: </label>
+		                <input id="telFax" type="text" >
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="input-field col s12">
+		                <label for="fechaTrabajaDesde:" style="font-size:18px;margin-top:20px;">Trabaja Desde: </label>
+		                <input id="fechaTrabajaDesde" placeholder="dd/mm/yyyy" type="text" >
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="input-field col s12">
+		                <label for="ingresoMensual:">Ingreso Mensual: </label>
+		                <input id="ingresoMensual" type="text" >
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="input-field col s12">
+		                <label for="egresoMensual:">Egreso Mensual: </label>
+		                <input id="egresoMensual" type="text" >
+		            </div>
+		        </div>
+		        <!-- Datos Anexos -->
+		        <h4 class="titleLote">Otros Datos</h4>
+		        <div class="row">
+		            <div class="input-field col s12">
+		                <label for="nacionalidad:">Nacionalidad: </label>
+		                <input id="nacionalidad" type="text" >
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="input-field col s12">
+		                <label for="lugarNacimiento:">Lug. Nacimiento: </label>
+		                <input id="lugarNacimiento" type="text" >
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="input-field col s12">
+		                <label style="font-size:18px;margin-top:20px;" for="fechaNacimiento:">Fec. Nacimiento: </label>
+		                <input id="fechaNacimiento" placeholder="dd/mm/yyyy" type="text" >
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="input-field col s12">
+		            <select id="estadoCivil">
+		                <option value="S" selected>Soltero/a</option>
+		                <option value="C">Casado/a</option>
+		                <option value="V">Viudo/a</option>
+		                <option value="A">Aconcuvinado/a</option>
+		                <option value="D">Divorciado/a</option>
+		            </select>
+		            <label>Estado Civil</label>
+		          </div>
+		        </div>
+		        <div class="row">
+		            <div class="input-field col s12">
+		            <label>Sexo</label>
+		            <select id="generoSexo">
+		                <option value="M" selected>Masculino</option>
+		                <option value="F">Femenino</option>
+		            </select>
+		          </div>
+		        </div>
+		        <div class="row">
+		            <div class="input-field col s12">
+		                <label for="cantHijos:">Hijos: </label>
+		                <input id="cantHijo" type="text" >
+		            </div>	
+		        </div>
+		        <h4 class="titleLote">Datos del Cónyuge</h4>
+		        <div class="row">
+		            <div class="input-field col s12">
+		                <label for="conyugeCi:">Cédula: </label>
+		                <input id="conyugeCi" type="text" >
+		            </div>	
+		        </div>
+		        <div class="row">
+		            <div class="input-field col s12">
+		                <label for="conyugeNombre:">Nombres: </label>
+		                <input id="conyugeNombre" type="text" >
+		            </div>	
+		        </div>
+		        <div class="row">
+		            <div class="input-field col s12">
+		                <label for="conyugeApellido:">Apellido: </label>
+		                <input id="conyugeApellido" type="text" >
+		            </div>	
+		        </div>
+		        <div class="row">
+		        	<!-- <input style="background:lime;color:#fff;" type="submit" value="Enviar" > -->
+		        	<div class="col s12" style="margin-bottom: 50px;">
+		        		<a href="#" class="btn waves-effect waves-teal orange lighten-1" id="btnFormNewClient">Enviar</a>
+		        	</div>
+		        </div>
+		        
+
+
+		</form>
+	</div>
+</div>
+
+
+<!-- Solicitud de Venta -->
+<div data-role="page" id="SolicitudVenta">
+	<div class="nav-wrapper headingPage">
+		<div class="iconMenu">
+			<a href="#" data-activates="mobile-demo" class="button-collapse" id="iconActiveMenu"><i class="material-icons">menu</i></a>	
+		</div>
+		<div class="titlePage">
+			<a href="#!" class="brand-logo">Lotes</a>
+		</div>
+	</div>
+	
+	<div role="main" class="ui-content">    
+		<div class="row">
+		    <form class="col s12 " id="formVenta" >
+		      	<div class="row">
+		        	<div class="input-field col s9">
+		        		<img class="prefix" src="assets/img/icons/profile.png"><br>
+		          		<label for="ciCliente:">C.I:</label>
+		          		<input id="ciCliente" type="text">
+		          		
+		        	</div>
+		        	<div class="input-field col s3  "><!--offset-s3-->
+		      			<a href="#" id="btnBuscarCliente" class="btn waves-effect waves-teal orange lighten-1"><i class="material-icons dp48">search</i></a>
+		      		</div>
+		      	</div>
+      			<!-- Datos del cliente -->
+      			<div class="row">
+      				<div id="boxDataTakeClient" class="boxLote"></div>	
+      			</div>
+      			<div class="row">
+      				<div id="boxDataLote"></div>
+      			</div>
+				<div class="row">
+		        	<div class="input-field col s12">
+						<label style="font-size:18px;margin-top:30px;">Fecha de Venta:</label>
+                        <input id="fechaVenta"  placeholder="dd/mm/yyyy" type="text" >
+		        	</div>
+		      	</div>
+		      	<div class="row">
+		      		<div class="input-field col s12">
+		          		<label for="itemcondicion:">Plan de Pago :</label>
+						<select id="itemcondicion"></select>
+		        	</div>
+		      	</div>
+		      	<div class="row">
+		        	<div class="input-field col s12">
+		          		<textarea id="observacionVenta" class="materialize-textarea"></textarea>
+          				<label for="observacionVenta">Observaciones: </label>
+		        	</div>
+		      	</div>
+		      	<div class="row">
+			      	<div class="col s12"><br>
+			      		<a href="#" class="btn waves-effect waves-teal orange lighten-1" id="reservarVenta">Enviar</a>
+			      	</div>
+		      	</div>
+		    </form>
+  		</div>
+  		
+	</div>
+</div>
+
+
+<!-- Pantalla de Configuracion -->
+<div data-role="page" id="Config">
+	<div class="nav-wrapper headingPage">
+		<div class="iconMenu">
+			<a href="#" data-activates="mobile-demo" class="button-collapse" id="iconActiveMenu"><i class="material-icons">menu</i></a>	
+		</div>
+		<div class="titlePage">
+			<a href="#!" class="brand-logo">Configuración</a>
+		</div>
+		<!-- <div class="titlePage">
+			<img class="logoImg" src="assets/img/logo.png">
+		</div> -->
+	</div>
+	
+	<div role="main" class="ui-content">    
+		<div class="row">
+		    <form class="col s12 formConfig" >
+		      	<div class="row">
+		        	<div class="input-field col s12">
+		        		<img class="prefix" src="assets/img/icons/homeStore	.png"><br>
+		          		<label for="servidor:">Servidor + Puerto: </label>
+		          		<input id="servidor" type="text">
+		        	</div>
+		      	</div>
+		      	<div class="row">
+		        	<div class="input-field col s12">
+		        		<img class="prefix" src="assets/img/icons/wifi.png"><br>
+		          		<label for="webservice:">Recurso: </label>
+		          		<input id="webservice" type="text" value="">
+		        	</div>
+		      	</div>
+		      	<div class="row">
+		        	<div class="input-field col s12">
+		        	<img class="prefix" src="assets/img/icons/profile.png"><br>
+		          	<input id="user" type="text" >
+		          	<label for="user">Usuario: </label>
+		        	</div>
+		      	</div>
+		      	<div class="row">
+		        	<div class="input-field col s12">
+		        		<img class="prefix" src="assets/img/icons/pass.png"><br>
+		          		<label for="pw:">Contraseña: </label>
+		          		<input id="pw" type="password" >
+		        	</div>
+		      	</div>
+		      	<div class="row">
+		      		<div class="input-field col s12 "><!--offset-s3-->
+		      			<a href="#" id="btnLogIn" class="btn waves-effect waves-teal orange lighten-1">Guardar</a><!--  -->
+		      		</div>
+		      	</div>
+                <div class="row">
+		      		<div id="errorAcceso"></div>
+		      	</div>
+		    </form>
+  		</div>
+
+	</div>
+</div>
+
+<!-- Listado de Fracciones en base al departamento -->
+<div data-role="page" id="Fracciones_D">
+	<div class="nav-wrapper headingPage">
+		<div class="iconMenu">
+			<a href="#" data-activates="mobile-demo" class="button-collapse" id="iconActiveMenu"><i class="material-icons">menu</i></a>	
+		</div>
+		<div class="titlePage">
+			<a href="#!" class="brand-logo">Fracciones</a>
+		</div>
+		<div class="iconRightFraccion" >
+			<a href="#Fracciones_D" data-activates="mobile-demo" ><i class="material-icons">loop</i></a>	
+		</div>
+	</div>
+	<div role="main" class="ui-content">   
+		<div id="fracciones_por_departamento"></div>
+	</div>
+</div>
+
+
+<!-- Listado de Fracciones -->
+<!-- <div data-role="page" id="Manzanas_F">
+	<div role="main" class="ui-content">   
+		<div id="manzanas_por_departamento"></div>
+	</div>
+</div> -->
+
+
+<!-- Listado de Lotes -->
+<div data-role="page" id="Lotes_F">
+	<div class="nav-wrapper headingPage">
+		<div class="iconMenu">
+			<a href="#" data-activates="mobile-demo" class="button-collapse" id="iconActiveMenu"><i class="material-icons">menu</i></a>	
+		</div>
+		<div class="titlePage">
+			<a href="#!" class="brand-logo">Lotes</a>
+		</div>
+	</div>
+	<div role="main" class="ui-content">   
+		<div id="lotes_por_fraccion">
+			<ul class="collection" id="listLotes" ></ul>
+		</div>
+	</div>
+	<div role="main" class="ui-content">
+		<div class="fixed-action-btn">
+	    <a class="btn-floating btn-large teal lighten-2 filterIcon" href="#Filtro_L">
+	      <!--<img class="btn-filter" src="assets/img/icons/listFilter.png">-->
+            <i class="material-icons dp48" style="font-size:30px;">list</i>
+	    </a>
+	  	</div>
+		<div id="lotes_por_fraccion"></div>
+	</div>
+</div>	
+
+
+<!-- Detalle de lote -->
+<div data-role="page" id="Descripcion_L">
+	<div class="nav-wrapper headingPage">
+		<div class="iconMenu">
+			<a href="#" data-activates="mobile-demo" class="button-collapse" id="activeMenoLotes"><i class="material-icons">menu</i></a>	
+		</div>
+		<div class="titlePage">
+			<a href="#!" class="brand-logo">Lotes</a>
+		</div>
+		<div class="iconRight" id="botonReserva"></div>
+	</div>
+	<div role="main" class="ui-content">   
+		<div id="botonReserva"></div>
+		<div id="lote_descripcion"></div>
+	</div>
+</div>
+
+<!-- Filtro de lotes -->
+<div data-role="page" id="Filtro_L">
+	<div class="nav-wrapper headingPage">
+		<div class="iconMenu">
+			<a href="#" data-activates="mobile-demo" class="button-collapse" id="iconActiveMenu"><i class="material-icons">menu</i></a>	
+		</div>
+		<div class="titlePage">
+			<a href="#!" class="brand-logo">Lotes</a>
+		</div>
+	</div>
+  	<div data-role="main" class="ui-content">
+    	<form id="filtroForm">
+    		<div id="selectRangoMonto"></div>
+    		<input type="hidden" name="fraccion" id="idFraccionHidden" value="">
+            <!--  -->
+            <div class="row">
+                <div class="input-field col s1 offset-s1">
+                    <a class="btn-filtros waves-effect waves-light btn btn-large orange lighten-1" href="#Lotes_F" id="loteFilter">Filtrar</a>
+                </div>
+                <div class="input-field col s1 offset-s4">
+                    <a class="btn-filtros waves-effect waves-light btn btn-large orange lighten-1" href="#" id="resertFormFilter">Limpiar</a>
+                </div>
+    		</div>
+    	</form>
+  	</div>
+</div>
+
+<!-- Acerca de la Empresa -->
+<div data-role="page" id="AcercaDe">
+	<div class="nav-wrapper headingPage">
+		<div class="iconMenu">
+			<a href="#" data-activates="mobile-demo" class="button-collapse" id="iconActiveMenu"><i class="material-icons">menu</i></a>	
+		</div>
+		<div class="titlePage">
+			<a href="#!" class="brand-logo">Acerca de</a>
+		</div>
+		<!-- <div class="titlePage">
+			<img class="logoImg" src="assets/img/logo.png">
+		</div> -->
+	</div>
+	<div data-role="main" class="ui-content">
+    	<div class="titleAcercaDe">
+			<img class="logoImg" src="assets/img/logo.png" >
+		</div>
+		<ul class="collection ">
+			<li class="collection-item">Maker Inmobiliaria</li>
+			<li class="collection-item">Version: 1.0.10</li>
+			<li class="collection-item">Web: <a href="http://www.oym.com.py/">www.oym.com.py</li>
+			<li class="collection-item"><center><img src="assets/img/inmobicon.png"></center></li>
+		</ul>
+  	</div>
+</div>
+
+
+
+
+
+</body>
+</html>
