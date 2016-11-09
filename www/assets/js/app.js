@@ -2,38 +2,33 @@ window.onload = function(){
     document.addEventListener("deviceready", onDeviceReady, false);
 }
 
-
 function onDeviceReady(){
     if (!checkConnection()){
         alert("Por favor verifque su conexion a internet");
     }
 }
 
-function checkConnection() {
-    var networkState = navigator.connection.type;
-/*
-    var states = {};
-    states[Connection.UNKNOWN]  = 'Unknown connection';
-    states[Connection.ETHERNET] = 'Ethernet connection';
-    states[Connection.WIFI]     = 'WiFi connection';
-    states[Connection.CELL_2G]  = 'Cell 2G connection';
-    states[Connection.CELL_3G]  = 'Cell 3G connection';
-    states[Connection.CELL_4G]  = 'Cell 4G connection';
-    states[Connection.CELL]     = 'Cell generic connection';
-    states[Connection.NONE]     = 'Por favor verifique su conexion a Internet';
-
-    alert('Connection type: ' + states[networkState]);*/
-    
-    
-    if (networkState != Connection.NONE){
-        return true;
+function checkConnection() {    
+    var networkState;        
+    try {        
+        networkState = navigator.connection.type;
+        if (networkState !== Connection.NONE){
+            return true;        
+        }    
+    }    
+    catch (exception){
+        return navigator.onLine;    
     }
+    
     return false;
 }
 
+
+
+
 /*
 function initMapLote(){
-    
+
     loteMapCenter = new google.maps.LatLng(-25.3112836,-57.6006347);
     loteMapPropiedades = {
         center: loteMapCenter, //-25.3112836,
@@ -43,11 +38,11 @@ function initMapLote(){
     map = new google.maps.Map(document.getElementById('boxMapLote'), loteMapPropiedades);
     var marker = new google.maps.Marker({ position : loteMapCenter , icon : ""});
     marker.setMap(map);
-    
-    
+
+
     google.maps.event.addListener(marker,"click", function(){
         infowindow = new google.maps.InfoWindow({
-           content: "OyM System Group" 
+           content: "OyM System Group"
         });
         infowindow.open(map,marker);
     });
@@ -58,10 +53,10 @@ window.onload = ;
 */
 
 $(document).on("ready",function(){
-   
-    
 
-    //localStorage.clear(); 
+
+
+    //localStorage.clear();
     //Variables Globales para el filtro
 
     var montoCuotaFiltro = [0,100000, 200000, 300000,400000,500000,600000,700000,800000, 9999999999];
@@ -78,19 +73,19 @@ $(document).on("ready",function(){
             return false;
         }
     }
-    
-    
+
+
     //Si los datos estan almacenados en el navegador
     // (URL, username y password) Accede directo
     $("#servidor").val(baseUrl);
     $("#webservice").val(urlWebService);
 
-    
+
     if (localStorage.getItem("url") == null){
         $(".loading-item").addClass("emptyCss");
     }
 
-    
+
 
     //Establece la url base en base a la url/ip del servidor
     $("#servidor").change(function(){
@@ -102,7 +97,7 @@ $(document).on("ready",function(){
             localStorage.setItem("url",baseUrl);
             baseUrl = "http://"+baseUrl+"/";
         }
-    });  
+    });
 
     //Establece el webservice
     $("#webservice").change(function(){
@@ -119,14 +114,14 @@ $(document).on("ready",function(){
 
     // Actualiza la pagina Principal, con el token actual
     $("#iconReload").click(function(){
-       location.reload(); 
+       location.reload();
     });
 
     /*$(".iconRight").click(function(){
         $(".loading-item").addClass("emptyCss");
     });*/
 
-    
+
     //Actualiza el usuario
     $("#user").change(function(){
         username = '';
@@ -169,7 +164,7 @@ $(document).on("ready",function(){
 
         var idProvincia = $(this).attr("data-provincia");
         var page = get_data_with_json(baseUrlComplete+"/gifraccionview?dpto="+idProvincia,"listFraccionPorDepartamento");
-        $("#fracciones_por_departamento").html('');    
+        $("#fracciones_por_departamento").html('');
 
 
         window.location.assign("#Fracciones_D");
@@ -190,10 +185,10 @@ $(document).on("ready",function(){
 
     });
 
-    
 
 
-    // Lista las manzanas en base a la fraccion obtenida 
+
+    // Lista las manzanas en base a la fraccion obtenida
     /*$('#fracciones_por_departamento').delegate( 'ul > li', 'click', function(){
         var idFraccion = $(this).attr("data-fraccion");
         var page = get_data_with_json(urlBase+"giloteview/fraccion/"+idFraccion,2);
@@ -202,7 +197,7 @@ $(document).on("ready",function(){
 
     // Lista Lotes por Fracciones
     $('#fracciones_por_departamento').delegate( 'ul > li', 'click', function(){
-        $("#lotes_por_fraccion > #listLotes").html('');  
+        $("#lotes_por_fraccion > #listLotes").html('');
         var idFraccion = $(this).attr("data-fraccion");
         localStorage.setItem("id_fraccion",idFraccion);
         console.log("Por departamento");
@@ -226,13 +221,13 @@ $(document).on("ready",function(){
     $(".button-collapse").sideNav();
 
     $("#HomeLink , #AllFracciones, #acercade_app,#FormClient").click(function(){
-        $('.button-collapse').sideNav('hide');  
+        $('.button-collapse').sideNav('hide');
         $('#fracciones_por_departamento').html("");
     });
 
 
     $("#FormClient").click(function(){
-        document.getElementById("formNewClient").reset(); 
+        document.getElementById("formNewClient").reset();
     });
 
     $('.dropdown-loteOption').dropdown({
@@ -245,25 +240,25 @@ $(document).on("ready",function(){
         alignment: 'left' // Displays dropdown with edge aligned to the left of button
         }
     );
-    
+
     /*
         === modificar
     $("#listLoteOptions").click(function(){
         alert("demo");
-        
-        
-        
+
+
+
         $('.dropdown-loteOption').dropdown('open');
     });
     */
-    
-    
+
+
 
     $("#Configuration").click(function(){
         //localStorage.removeItem("initSession");
         $("#errorAcceso").html("");
         //$(".brand-logo").html("<img class=\"logoImg\" src=\"assets/img/einmobi.png\">");
-        $('.button-collapse').sideNav('hide');    
+        $('.button-collapse').sideNav('hide');
         window.location.assign("#Config");
     });
 
@@ -273,7 +268,7 @@ $(document).on("ready",function(){
     function menuPrincipal(){
         hText = "<ul class=\"side-nav\" id=\"mobile-demo\">";
         //hText += "<li><div class=\"userView\"><img class=\"background\" src=\"assets/img/fondo-01.jpg\">";
-        //hText += "<img class=\"logo\" src=\"assets/img/logo.png\"></a>"; 
+        //hText += "<img class=\"logo\" src=\"assets/img/logo.png\"></a>";
         //hText += "<span class=\"white-text name\" >Usuario: <b id=\"username\">USER</b></span></a>";
         //hText += "</div></li>";
         hText += "<li><a href=\"#HomePage\" id=\"HomeLink\">Departamentos</a></li>";
@@ -282,7 +277,7 @@ $(document).on("ready",function(){
         hText += "<li><a href=\"#Config\" id=\"Configuration\">Configuración</a></li>";
         hText += "<li><div class=\"divider\"></div></li>";
         hText += "<li><a href=\"#AcercaDe\" id=\"acercade_app\">Acerca de</a></li>";
-        hText += "</ul>";         
+        hText += "</ul>";
         return hText;
     }
 
@@ -294,7 +289,7 @@ $(document).on("ready",function(){
     //Actualiza la pagina principal
     $("#HomeLink,#HomePage").click(function(){
 //            if (statusConexion()){
-            get_data_with_json(baseUrlComplete+"/provinciaview", "listDepartamentos");    
+            get_data_with_json(baseUrlComplete+"/provinciaview", "listDepartamentos");
 //            }
 //            else {
         //    alert("Por favor verifique su conexion a internet");
@@ -307,15 +302,15 @@ $(document).on("ready",function(){
         hText = '';
         for(i = 0; i < valor.length - 1; i++){
             if (valor[i] < (valor[1])){
-                hText += "<label for=\""+valor[i]+"\">Menor a Gs. "+formatNumber(valor[i+1].toString())+"</label>";   
+                hText += "<label for=\""+valor[i]+"\">Menor a Gs. "+formatNumber(valor[i+1].toString())+"</label>";
             }
             else if (valor[i+1]+1 > (valor[valor.length - 1])){
-                hText += "<label for=\""+valor[i]+"\">Mayor a Gs. "+formatNumber(valor[i].toString())+"</label>";   
+                hText += "<label for=\""+valor[i]+"\">Mayor a Gs. "+formatNumber(valor[i].toString())+"</label>";
             }
             else {
                 hText += "<label for=\""+valor[i]+"\">Gs. "+formatNumber(valor[i].toString())+" y  Gs. "+formatNumber((valor[i+1] - 1).toString())+"</label>";
             }
-            hText += "<input name=\""+name+"\" type=\"radio\" id=\""+valor[i]+"\" value=\""+i+"\">"; 
+            hText += "<input name=\""+name+"\" type=\"radio\" id=\""+valor[i]+"\" value=\""+i+"\">";
             //alert(formatNumber(valor[i+1].toString()));
         }
 
@@ -326,7 +321,7 @@ $(document).on("ready",function(){
         hText = '';
         for(i = 0; i < valor.length; i++){
             hText += "<label for=\""+valor[i]+"\">"+valor[i]+"</label>";
-            hText += "<input name=\""+name+"\" type=\"checkbox\" id=\""+valor[i]+"\" value=\""+valor[i]+"\">"; 
+            hText += "<input name=\""+name+"\" type=\"checkbox\" id=\""+valor[i]+"\" value=\""+valor[i]+"\">";
         }
 
         return hText;
@@ -342,7 +337,7 @@ $(document).on("ready",function(){
         return hText;
     }
 
-    // Obtiene aquellos filtros que se encuantra seleccionados cuando 
+    // Obtiene aquellos filtros que se encuantra seleccionados cuando
     // se o
     $("#loteFilter").click(function(){
         filtrosEstado = [];
@@ -359,7 +354,7 @@ $(document).on("ready",function(){
 
         //Obtiene los datos de cada item(lote) de la lista
         $("#listLotes li").each(function(){
-            elementFormContent = []; 
+            elementFormContent = [];
             valueEstado = '';
 
 
@@ -387,7 +382,7 @@ $(document).on("ready",function(){
 
             //Verifica si los valores del precio se encuentra en el rango establecido
             if (isNaN(opcionPrecioSeleccion)){
-                if (valueEstado != ''){ 
+                if (valueEstado != ''){
                     $(this).removeClass('emptyCss').addClass('collection-item');
                     $(this).find('i').removeClass('emptyCss').addClass('prefix');
                     $(this).find('img').removeClass('emptyCss');
@@ -403,7 +398,7 @@ $(document).on("ready",function(){
                 }
             }
             else { // Para el caso que ambos esten seleccionados
-                if (precioCuotaLote >= montoCuotaFiltro[opcionPrecioSeleccion] 
+                if (precioCuotaLote >= montoCuotaFiltro[opcionPrecioSeleccion]
                 && precioCuotaLote < montoCuotaFiltro[opcionPrecioSeleccion + 1] && valueEstado != ''){
                     $(this).removeClass('emptyCss').addClass('collection-item');
                     $(this).find('i').removeClass('emptyCss').addClass('prefix');
@@ -417,7 +412,7 @@ $(document).on("ready",function(){
                     $(this).find('img').addClass('emptyCss');
                     $(this).find('span').removeClass('title').addClass('emptyCss');
                     $(this).find('p').removeClass('pLote').addClass('emptyCss');
-                }   
+                }
             }
 
         });
@@ -429,8 +424,8 @@ $(document).on("ready",function(){
         $("#listLotes > li > i").removeClass('emptyCss').addClass('material-icons');
         $("#listLotes > li > i > img").removeClass('emptyCss');
         $("#listLotes > li > span").removeClass('emptyCss').addClass('title');
-        $("#listLotes > li > p").removeClass('emptyCss').addClass('pLote'); 
-        $("#listLotes > li > a > i ").removeClass('emptyCss'); 
+        $("#listLotes > li > p").removeClass('emptyCss').addClass('pLote');
+        $("#listLotes > li > a > i ").removeClass('emptyCss');
         history.back(1);
     });
 
@@ -468,24 +463,24 @@ $(document).on("ready",function(){
     });
 
     $("#botonReserva").delegate("#btnActiveReserva","click",function(){
-        $("#ciCliente").val(''); 
+        $("#ciCliente").val('');
         $("#boxDataTakeClient").html('');
         setDateCurrent("#fechaVenta");
-        
+
         //getPlazoVenta();
         //get_data_with_json(baseUrlComplete+"/itemmovcondicionview"  ,9);
-        htmlItemCondition(); //Plazo de 
+        htmlItemCondition(); //Plazo de
         htmlTakeLote();
         window.location.assign("#SolicitudVenta");
         console.log("Usted ha dado click Solicitud venta");
-        
+
     });
 
 
     $("#botonReserva").delegate("#btnVerMapa","click",function(){
         window.location.assign("#MapaLote");
         console.log("Usted ha dado click sobre ver mapa");
-        
+
     });
 
     //Redirecciona en caso que no exista cliente al formulario nuevo cliente
@@ -499,14 +494,14 @@ $(document).on("ready",function(){
     function setDateToMilisecond(value){
         fecha = value.split("/");
         if(fecha.length == 3){
-            d = new Date(parseInt(fecha[2]),parseInt(fecha[1])-parseInt(1),parseInt(fecha[0]));    
+            d = new Date(parseInt(fecha[2]),parseInt(fecha[1])-parseInt(1),parseInt(fecha[0]));
             console.log(d.valueOf());
             return d.valueOf();
         }
         else {
-            return null;   
+            return null;
         }
-    } 
+    }
 
     //$("#formNewClient").submit(function(event){
     $("#btnFormNewClient").click(function(event){
@@ -517,7 +512,7 @@ $(document).on("ready",function(){
         }
         if ($("#nombres").val() == ''){
             mensaje += "Verifiqué Nombre\n";
-        }   
+        }
         if ($("#apellido").val() == ''){
             mensaje += "Verifiqué Apellido\n";
         }
@@ -526,10 +521,10 @@ $(document).on("ready",function(){
         }
         if ($("#tel").val() == ''){
             mensaje += "Verifiqué Teléfono Particular\n";
-        } 
+        }
         if ($("#cel").val() == ''){
             mensaje += "Verifiqué Celular\n";
-        } 
+        }
 
         if ($("#conyugeCi").val().length > 0){
             if ($("#conyugeNombre").val() == ''){
@@ -544,9 +539,9 @@ $(document).on("ready",function(){
 
         //Si la bandera esta activa todos los campos fueron completados
         if (mensaje != ''){
-            alert(mensaje); 
+            alert(mensaje);
             event.preventDefault();
-        } 
+        }
         else {
             var fechaingresotrabajo = setDateToMilisecond($("#fechaTrabajaDesde").val());
             var fechanacimiento = setDateToMilisecond($("#fechaNacimiento").val());
@@ -626,9 +621,9 @@ $(document).on("ready",function(){
                     }
 
                 }
-            });   
+            });
 
-            xhr.open("POST",baseUrlComplete+"/clienteview",true);  
+            xhr.open("POST",baseUrlComplete+"/clienteview",true);
             xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
             xhr.setRequestHeader("token", localStorage.getItem("token"));
             xhr.setRequestHeader("accept", "application/json");
@@ -647,7 +642,7 @@ $(document).on("ready",function(){
 
     function setDateCurrent(element){
         var f = new Date();
-        $(element).val(f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear());    
+        $(element).val(f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear());
     }
 
     //Formulado de la venta
@@ -668,15 +663,15 @@ $(document).on("ready",function(){
             }
             if ($("#fechaVenta").val() == ''){
                 mensaje += "Verifiqué Fecha Particular\n";
-            } 
+            }
 
 
 
             //Si la bandera esta activa todos los campos fueron completados
             if (mensaje != ''){
-                alert(mensaje); 
+                alert(mensaje);
                 event.preventDefault();
-            } 
+            }
             else {
 
                 if ($("#itemcondicion").val() == 1){
@@ -686,13 +681,13 @@ $(document).on("ready",function(){
                     cuotasCnt = localStorage.getItem("cant_cuotas");
                 }
 
-                var xhr = new XMLHttpRequest();                
+                var xhr = new XMLHttpRequest();
                 var datosVenta = {
                     "fecha": setDateToMilisecond($("#fechaVenta").val()),
                     "giFraccion": localStorage.getItem("fraccionCodigo"),
                     "giManzana": localStorage.getItem("id_manzana"),
                     "giLote": localStorage.getItem("loteCodigo"),
-                    "recibonro": "", 
+                    "recibonro": "",
                     "cambio":1,
                     "preciovtacontado":localStorage.getItem("contado"),
                     "porcadminvtacontado":0,
@@ -702,7 +697,7 @@ $(document).on("ready",function(){
                     "fechaprimervto": setNextMonth($("#fechaVenta").val()) ,
                     "cuotasCnt": cuotasCnt,
                     "observacion":$("#observacionVenta").val(),
-                    "impuestogrupo":10, 
+                    "impuestogrupo":10,
                     "ctacte": localStorage.getItem("id_cliente"),
                     "vendedor": "0",
                     "conductor": "0"
@@ -721,8 +716,8 @@ $(document).on("ready",function(){
                             console.log(jSon.errorMessage);
                         }
                         else {
-                            $("#lote_descripcion").html('');  
-                            $("#lotes_por_fraccion > #listLotes").html('');  
+                            $("#lote_descripcion").html('');
+                            $("#lotes_por_fraccion > #listLotes").html('');
                             get_data_with_json(baseUrlComplete+"/giloteview/"+localStorage.getItem("id_lote"),"detalleLote");
                             get_data_with_json(baseUrlComplete+"/giloteview/fraccion/"+localStorage.getItem("id_fraccion"),"listLotePorFraccion");
 
@@ -738,9 +733,9 @@ $(document).on("ready",function(){
                         }
 
                     }
-                });   
+                });
 
-                xhr.open("POST",baseUrlComplete+"/gilotevta",true);  
+                xhr.open("POST",baseUrlComplete+"/gilotevta",true);
                 xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
                 xhr.setRequestHeader("token", localStorage.getItem("token"));
                 xhr.setRequestHeader("accept", "application/json");
@@ -759,16 +754,16 @@ $(document).on("ready",function(){
     function setNextMonth(value){
        fecha = value.split("/");
         if(fecha.length == 3){
-            d = new Date(parseInt(fecha[2]),parseInt(fecha[1]),parseInt(fecha[0]));    
+            d = new Date(parseInt(fecha[2]),parseInt(fecha[1]),parseInt(fecha[0]));
             //console.log("Fecha Sigte Mes"+d.valueOf());
             return d.valueOf();
         }
         else {
-            return null;   
+            return null;
         }
     }
 
-    //Obtener los datos de 
+    //Obtener los datos de
     /*$("button").click(function(){
         $.get("dem  o_test.asp", function(data, status){
             alert("Data: " + data + "\nStatus: " + status);
@@ -795,11 +790,11 @@ $(document).on("ready",function(){
             else {
                 tmp = $(this).val();
             }
-        }); 
+        });
     }
 
 
-    // === validar formulario de venta clientes === 
+    // === validar formulario de venta clientes ===
     restringirLongitudInput("#cedula,#conyugeCi",9);
     restringirLongitudInput("#nombres,#apellido,#empresa,#dirLaboral,#lugarNacimiento,#conyugeNombre,#conyugeApellido",50);
     restringirLongitudInput("#dirParticular,#email",100);
@@ -811,7 +806,7 @@ $(document).on("ready",function(){
     // Verifica si hay conexion
 
 
-}); 
+});
 
 defaultWebService = "makerwebservices/api/v1";
 
@@ -830,7 +825,7 @@ if(localStorage.getItem("webservice") == null ){
     alert("Por favor verifique el Web Service en su Configuracion");
     localStorage.setItem("webservice", defaultWebService);
     urlWebService = defaultWebService;
-}   
+}
 else {
     urlWebService = localStorage.getItem("webservice");
 }
@@ -881,10 +876,10 @@ function getLogIn(){
        /* else {
             localStorage.setItem("available",parseInt(localStorage.getItem("available")) + 1);
             alert(localStorage.getItem("available"));
-            
+
         }
        */
-        
+
     });
     countAvailable++;
     xhr.open("GET", baseUrlComplete+"/login/"+username+"/"+pw);
@@ -897,7 +892,7 @@ function getLogIn(){
 function statusConexion(){
 if (navigator.onLine){
     return true;
-} 
+}
 return false;
 }
 
@@ -920,8 +915,8 @@ function get_data_with_json(url, type){
                 case "detalleLote":
                     htmlLoteDescription(jSon);
                     break;
-                case "listDepartamentos": 
-                    htmlListDepartamentos(jSon);    
+                case "listDepartamentos":
+                    htmlListDepartamentos(jSon);
                     break;
                 case "listAllFracciones":
                     htmlAllFraccion(jSon);
@@ -945,7 +940,7 @@ function get_data_with_json(url, type){
     });
 
     xhr.open("GET", url);
-    xhr.setRequestHeader("token", localStorage.getItem("token"));    
+    xhr.setRequestHeader("token", localStorage.getItem("token"));
     xhr.setRequestHeader("accept", "application/json");
 
     xhr.send(null);
@@ -969,13 +964,13 @@ function htmlFraccionByDepartamento(arr){
         provinciaName = arr[0].provincianombre;
         var titulo = "<h1>"+provinciaName+"</h1>";
         for(i = 0; i < arr.length; i++){
-            hText += "<li class=\"collection-item\" data-fraccion=\""+arr[i].idgiFraccion+"\">"+arr[i].nombre+"</li>";    
+            hText += "<li class=\"collection-item\" data-fraccion=\""+arr[i].idgiFraccion+"\">"+arr[i].nombre+"</li>";
         }
-        $("#fracciones_por_departamento").html("<h1 class=\"text-center\" >"+provinciaName+"</h1><ul  id=\"listadoFracciones\" class=\"collection \" >"+hText+"</ul>");  
+        $("#fracciones_por_departamento").html("<h1 class=\"text-center\" >"+provinciaName+"</h1><ul  id=\"listadoFracciones\" class=\"collection \" >"+hText+"</ul>");
     }
     else {
         hText = "<ul class=\"collection \" ><li class=\"collection-item\">No se encontraron Fracciones</li></ul>";
-        $("#fracciones_por_departamento").html(hText);  
+        $("#fracciones_por_departamento").html(hText);
     }
 }
 
@@ -985,14 +980,14 @@ function htmlAllFraccion(arr){
 
     if (arr.length > 0){
         for(i = 0; i < arr.length; i++){
-            hText += "<li class=\"collection-item\" data-fraccion=\""+arr[i].idgiFraccion+"\">"+arr[i].nombre+"<br><span style=\"font-size:12px;\">"+arr[i].provincianombre+"</span></li>";    
+            hText += "<li class=\"collection-item\" data-fraccion=\""+arr[i].idgiFraccion+"\">"+arr[i].nombre+"<br><span style=\"font-size:12px;\">"+arr[i].provincianombre+"</span></li>";
         }
         //<h1 class=\"text-center\" >Fracciones</h1>
-        $("#fracciones_por_departamento").html("<ul  id=\"listadoFracciones\" class=\"collection \" >"+hText+"</ul>");  
+        $("#fracciones_por_departamento").html("<ul  id=\"listadoFracciones\" class=\"collection \" >"+hText+"</ul>");
     }
     else {
         hText = "<ul class=\"collection \"><li class=\"collection-item\" >No se encontraron Fracciones</li></ul>";
-        $("#fracciones_por_departamento").html(hText);  
+        $("#fracciones_por_departamento").html(hText);
     }
 }
 
@@ -1001,9 +996,9 @@ function htmlManzanaByFraccion(arr){
     hText = '';
     vInicial = arr[0].idManzana;
     if (arr.length > 0){
-        for(i = 0;i < arr.length; i++){ 
+        for(i = 0;i < arr.length; i++){
             if (vInicial != arr[i].idgiManzana){
-                hText += "<li data-manzana=\""+arr[i].idgiManzana+"\">"+arr[i].idgiManzana+"</li>";        
+                hText += "<li data-manzana=\""+arr[i].idgiManzana+"\">"+arr[i].idgiManzana+"</li>";
                 vInicial = arr[i].idgiManzana;
             }
         }
@@ -1012,7 +1007,7 @@ function htmlManzanaByFraccion(arr){
         hText = "<li>No se encontraron Manzanas</li>";
 
     }
-    $("#manzanas_por_departamento").html("<ul id=\"listadoManzana\">"+hText+"</ul>");   
+    $("#manzanas_por_departamento").html("<ul id=\"listadoManzana\">"+hText+"</ul>");
 }
 
 
@@ -1021,7 +1016,7 @@ function htmlManzanaByFraccion(arr){
 function htmlLoteByFraccion(arr){
     $("#listLotes").html('');
     //var hTitle = "<h4 class=\"text-center\" >"+fraccionName+"</h4>";
-    //$("#listLotes").html("<ul class=\"collection\" id=\"listLotes\" >"+hText+"</ul>"); 
+    //$("#listLotes").html("<ul class=\"collection\" id=\"listLotes\" >"+hText+"</ul>");
     if (arr.length > 0){
         fraccionName = arr[0].giFraccionnombre;
         for(i = 0; i < arr.length; i++){
@@ -1036,13 +1031,13 @@ function htmlLoteByFraccion(arr){
             hText += "</li>";
 
             $("#listLotes").append(hText);
-        }     
+        }
     }
     else {
         hText = "<ul class=\"collection \" ><li>No se encontraron Fracciones</li></ul>";
-        //$("#lotes_por_fraccion").html("<ul class=\"collection\">"+hText+"</ul>");    
+        //$("#lotes_por_fraccion").html("<ul class=\"collection\">"+hText+"</ul>");
     }
-    //$("#lotes_por_fraccion").html(arr.length);    
+    //$("#lotes_por_fraccion").html(arr.length);
 }
 
 function setMillisecondToDate(value){
@@ -1055,9 +1050,9 @@ function setMillisecondToDate(value){
 
 //Descripcion del Lote
 function htmlLoteDescription(lote){
-    
+
     codigoManzana = lote.giManzana.trim();
-    $("#listLoteOptions").html(''); // No muestra el boton por defecto
+    $(".dropdown-loteOption").html(''); // No muestra el boton por defecto
 
     hText = '';
     //Codigo del loteamiento
@@ -1079,11 +1074,11 @@ function htmlLoteDescription(lote){
     hText += "<li class=\"collection-item avatar\" data-lote=\""+lote.idgiLote+"\">";
     hText += "<span class=\"title\" id=\"detailTitleLote\">"+loteName+"</span>";
     hText += returnIcon(lote.giLoteestado);
-    hText += "</li></ul>"; 
+    hText += "</li></ul>";
 
     //Valores con puntos, convierte a string
-    sena = formatNumber(respuestaIsNotNullCero(lote.importesena.toString())); 
-    
+    sena = formatNumber(respuestaIsNotNullCero(lote.importesena.toString()));
+
     // Venta
     hText += "<h4 class=\"titleLote\">Datos del Lote</h4></li>";
     hText += "<div class=\"boxLote\"><table class=\"bordered\" >";
@@ -1110,7 +1105,7 @@ function htmlLoteDescription(lote){
 
     // Superficie
     hText += "<h4 class=\"titleLote\">Dimensiones</h4></li>";
-    hText += "<div class=\"boxLote\"><table class=\"bordered\">";  
+    hText += "<div class=\"boxLote\"><table class=\"bordered\">";
     hText += "<tr><td>Superficie:</td><td class=\"text-right\"  > "+formatNumber(lote.superficieM2.toString())+"</td></tr>";
     hText += "<tr><td>Frente:</td><td class=\"text-right\"> "+formatNumber(lote.longFrente != null ? lote.longFrente.toString() : "0")+"</td></tr>";
     hText += "<tr><td>Norte:</td><td class=\"text-right\"> "+formatNumber(lote.longNorte.toString())+"</td></tr>";
@@ -1118,17 +1113,17 @@ function htmlLoteDescription(lote){
     hText += "<tr><td>Este:</td><td class=\"text-right\"> "+formatNumber(lote.longEste.toString())+"</td></tr>";
     hText += "</table></div>";
 
-    $("#lote_descripcion").html("<ul>"+hText+"</ul>");  
+    $("#lote_descripcion").html("<ul>"+hText+"</ul>");
 
 
 
 
-    if ((lote.giLoteestado.trim() == "Disponible" || lote.giLoteestado.trim() == "Recuperado") 
+    if ((lote.giLoteestado.trim() == "Disponible" || lote.giLoteestado.trim() == "Recuperado")
         && lote.importecuota != 0 && lote.preciovtacontado != 0){
-        //$("#botonReserva").html("<a  id=\"btnActiveReserva\" data-lote=\""+lote.idgiLote+"\" data-activates=\"mobile-demo\" ><i style=\"font-size:40px;\" class=\"material-icons\">turned_in</i></a>"); 
+        //$("#botonReserva").html("<a  id=\"btnActiveReserva\" data-lote=\""+lote.idgiLote+"\" data-activates=\"mobile-demo\" ><i style=\"font-size:40px;\" class=\"material-icons\">turned_in</i></a>");
         /*$("#botonReserva").html("<a href=\"#SolicitudVenta\" id=\"btnActiveReserva\" data-lote=\""+lote.idgiLote+"\" data-activates=\"mobile-demo\" ><img src=\"assets/img/3_puntos.png\" height=\"30\"></a>"); */
-        
-        $("#listLoteOptions").html("<i class=\"material-icons right\">more_vert</i>");
+
+        $(".dropdown-loteOption").html("<i class=\"material-icons right\">more_vert</i>");
         localStorage.setItem("id_lote",lote.idgiLote);
     }
     else {
@@ -1167,7 +1162,7 @@ function returnIcon(key){
     }
     else {
         iconColor = "";
-        iconImg = "folder";  
+        iconImg = "folder";
     }
     return "<i class=\" circle "+iconColor+" \"><img src=\"assets/img/icons/"+iconImg+".png\" ></i>";
 }
@@ -1218,13 +1213,13 @@ function formatNumber(val){
         num = num.split('').reverse().join('').replace(/^[\.]/,'');
         valor = num;
     }
-    else { 
+    else {
         alert('Solo se permiten numeros');
         val = val.replace(/[^\d\.]*/g,'');
     }
 
     return valor;
-}    
+}
 
 
  // La variable longitud no tiene ningun significado solo es implementada para el caso ya que no se cuenta
@@ -1257,7 +1252,7 @@ function htmlTakeClient(cliente){
     $("#itemcondicion").html(hText);
 }*/
 
-    
+
 
 function htmlItemCondition(){
     hText = "";
@@ -1283,6 +1278,3 @@ function htmlTakeLote(){
 
     $("#boxDataLote").html(hText);
 }
-
-
-

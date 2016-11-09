@@ -31,35 +31,10 @@
       #boxMapLote {
       	width: 100px;
         height: 500px;
-        background: #eaeaea;
+        background: #000;
       }
     </style>
-
-<script type="text/javascript">
-	function initMapLote(){
-    
-    loteMapCenter = new google.maps.LatLng(-25.3112836,-57.6006347);
-    loteMapPropiedades = {
-        center: loteMapCenter, //-25.3112836,
-        zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
-    map = new google.maps.Map(document.getElementById('boxMapLote'), loteMapPropiedades);
-    var marker = new google.maps.Marker({ position : loteMapCenter , icon : ""});
-    marker.setMap(map);
-    
-    
-    google.maps.event.addListener(marker,"click", function(){
-        infowindow = new google.maps.InfoWindow({
-           content: "OyM System Group" 
-        });
-        infowindow.open(map,marker);
-    });
-
-}
-
-</script>
-
+  
 </head>
 <body>
 
@@ -107,19 +82,19 @@
 		        <div class="row">
 		            <div class="input-field col s12">
 		                
-		                <label for="cedula:">Cédula: </label>
+		                <label for="cedula">Cédula: </label>
 		                <input id="cedula" type="text">
 		            </div>
 		        </div>
 		        <div class="row">
 		            <div class="input-field col s12">
-		                <label for="nombres:">Nombres: </label>
+		                <label for="nombres">Nombres: </label>
 		                <input id="nombres" type="text" value="">
 		            </div>
 		        </div>
 		        <div class="row">
 		            <div class="input-field col s12">
-		            <input id="apellido" type="text" >
+		            <input id="apellidos" type="text" >
 		            <label for="apellidos">Apellidos: </label>
 		            </div>
 		        </div>
@@ -134,20 +109,20 @@
 		        </div>
 		        <div class="row">
 		            <div class="input-field col s12">
-		                <label for="tel:">Teléfono: </label>
+		                <label for="tel">Teléfono: </label>
 		                <input id="tel" type="text" >
 		            </div>
 		        </div>
 		        <div class="row">
 		            <div class="input-field col s12">
-		                <label for="cel:">Celular: </label>
+		                <label for="cel">Celular: </label>
 		                <input id="cel" type="text" >
 		            </div>
 		        </div>
 		        <div class="row">
 		            <div class="input-field col s12">
-		                <label for="email:">Email: </label>
-		                <input id="email" type="email" required="yes">
+		                <label for="email">Email: </label>
+		                <input id="email" type="email" required>
 		            </div>
 		        </div>
 		    
@@ -155,7 +130,7 @@
 		        <h4 class="titleLote">Datos Laborales</h4>
 		        <div class="row">
 		            <div class="input-field col s12">
-		                <label for="empresa:">Trabaja en: </label>
+		                <label for="empresa">Trabaja en: </label>
 		                <input id="empresa" type="text" >
 		            </div>
 		        </div>
@@ -167,31 +142,31 @@
 		        </div>
 		        <div class="row">
 		            <div class="input-field col s12">
-		                <label for="telLaboral:">Teléfono Laboral: </label>
+		                <label for="telLaboral">Teléfono Laboral: </label>
 		                <input id="telLaboral" type="text" >
 		            </div>
 		        </div>
 		        <div class="row">
 		            <div class="input-field col s12">
-		                <label for="telFax:">Teléfono Fax: </label>
+		                <label for="telFax">Teléfono Fax: </label>
 		                <input id="telFax" type="text" >
 		            </div>
 		        </div>
 		        <div class="row">
 		            <div class="input-field col s12">
-		                <label for="fechaTrabajaDesde:" style="font-size:18px;margin-top:20px;">Trabaja Desde: </label>
+		                <label for="fechaTrabajaDesde" style="font-size:18px;margin-top:20px;">Trabaja Desde: </label>
 		                <input id="fechaTrabajaDesde" placeholder="dd/mm/yyyy" type="text" >
 		            </div>
 		        </div>
 		        <div class="row">
 		            <div class="input-field col s12">
-		                <label for="ingresoMensual:">Ingreso Mensual: </label>
+		                <label for="ingresoMensual">Ingreso Mensual: </label>
 		                <input id="ingresoMensual" type="text" >
 		            </div>
 		        </div>
 		        <div class="row">
 		            <div class="input-field col s12">
-		                <label for="egresoMensual:">Egreso Mensual: </label>
+		                <label for="egresoMensual">Egreso Mensual: </label>
 		                <input id="egresoMensual" type="text" >
 		            </div>
 		        </div>
@@ -199,19 +174,19 @@
 		        <h4 class="titleLote">Otros Datos</h4>
 		        <div class="row">
 		            <div class="input-field col s12">
-		                <label for="nacionalidad:">Nacionalidad: </label>
+		                <label for="nacionalidad">Nacionalidad: </label>
 		                <input id="nacionalidad" type="text" >
 		            </div>
 		        </div>
 		        <div class="row">
 		            <div class="input-field col s12">
-		                <label for="lugarNacimiento:">Lug. Nacimiento: </label>
+		                <label for="lugarNacimiento">Lug. Nacimiento: </label>
 		                <input id="lugarNacimiento" type="text" >
 		            </div>
 		        </div>
 		        <div class="row">
 		            <div class="input-field col s12">
-		                <label style="font-size:18px;margin-top:20px;" for="fechaNacimiento:">Fec. Nacimiento: </label>
+		                <label style="font-size:18px;margin-top:20px;" for="fechaNacimiento">Fec. Nacimiento: </label>
 		                <input id="fechaNacimiento" placeholder="dd/mm/yyyy" type="text" >
 		            </div>
 		        </div>
@@ -238,26 +213,26 @@
 		        </div>
 		        <div class="row">
 		            <div class="input-field col s12">
-		                <label for="cantHijos:">Hijos: </label>
+		                <label for="cantHijo">Hijos: </label>
 		                <input id="cantHijo" type="text" >
 		            </div>	
 		        </div>
 		        <h4 class="titleLote">Datos del Cónyuge</h4>
 		        <div class="row">
 		            <div class="input-field col s12">
-		                <label for="conyugeCi:">Cédula: </label>
+		                <label for="conyugeCi">Cédula: </label>
 		                <input id="conyugeCi" type="text" >
 		            </div>	
 		        </div>
 		        <div class="row">
 		            <div class="input-field col s12">
-		                <label for="conyugeNombre:">Nombres: </label>
+		                <label for="conyugeNombre">Nombres: </label>
 		                <input id="conyugeNombre" type="text" >
 		            </div>	
 		        </div>
 		        <div class="row">
 		            <div class="input-field col s12">
-		                <label for="conyugeApellido:">Apellido: </label>
+		                <label for="conyugeApellido">Apellido: </label>
 		                <input id="conyugeApellido" type="text" >
 		            </div>	
 		        </div>
@@ -293,12 +268,12 @@
 		      	<div class="row">
 		        	<div class="input-field col s9">
 		        		<img class="prefix" src="assets/img/icons/profile.png"><br>
-		          		<label for="ciCliente:">C.I:</label>
+		          		<label for="ciCliente">C.I:</label>
 		          		<input id="ciCliente" type="text">
 		          		
 		        	</div>
 		        	<div class="input-field col s3  "><!--offset-s3-->
-		      			<a href="#" id="btnBuscarCliente" class="btn waves-effect waves-teal orange lighten-1"><i class="material-icons dp48">search</i></a>
+		      			<a href="#" id="btnBuscarCliente" class="btn waves-effect waves-teal orange lighten-1"><i class="material-icons">search</i></a>
 		      		</div>
 		      	</div>
       			<!-- Datos del cliente -->
@@ -316,7 +291,7 @@
 		      	</div>
 		      	<div class="row">
 		      		<div class="input-field col s12">
-		          		<label for="itemcondicion:">Plan de Pago :</label>
+		          		<label for="itemcondicion">Plan de Pago :</label>
 						<select id="itemcondicion"></select>
 		        	</div>
 		      	</div>
@@ -357,15 +332,15 @@
 		    <form class="col s12 formConfig" >
 		      	<div class="row">
 		        	<div class="input-field col s12">
-		        		<img class="prefix" src="assets/img/icons/homeStore	.png"><br>
-		          		<label for="servidor:">Servidor + Puerto: </label>
+		        		<img class="prefix" src="assets/img/icons/homeStore.png"><br>
+		          		<label for="servidor">Servidor + Puerto: </label>
 		          		<input id="servidor" type="text">
 		        	</div>
 		      	</div>
 		      	<div class="row">
 		        	<div class="input-field col s12">
 		        		<img class="prefix" src="assets/img/icons/wifi.png"><br>
-		          		<label for="webservice:">Recurso: </label>
+		          		<label for="webservice">Recurso: </label>
 		          		<input id="webservice" type="text" value="">
 		        	</div>
 		      	</div>
@@ -379,7 +354,7 @@
 		      	<div class="row">
 		        	<div class="input-field col s12">
 		        		<img class="prefix" src="assets/img/icons/pass.png"><br>
-		          		<label for="pw:">Contraseña: </label>
+		          		<label for="pw">Contraseña: </label>
 		          		<input id="pw" type="password" >
 		        	</div>
 		      	</div>
@@ -462,7 +437,9 @@
 		</div>
 		<div class="iconRight" id="botonReserva">
 			<!-- Dropdown Trigger -->
-  			<a id="btnActiveReserva" class='dropdown-loteOption	' href='#' data-activates='drop1' data-beloworigin="true">Menu</a>
+  			<a id="btnActiveReserva" class='dropdown-loteOption' href='#SolicitudVenta' data-activates='drop1' data-beloworigin="true"></a>
+  			<!-- <a id="listLoteOptions" class='dropdown-loteOption	' href='#' data-activates='drop1' data-beloworigin="true">Menu</a> -->
+			
 
 			<!-- Dropdown Structure -->
 			<!-- <ul id='drop1' class='dropdown-content'>
@@ -548,14 +525,37 @@
 		<ul class="collection ">
 			<li class="collection-item">Maker Inmobiliaria</li>
 			<li class="collection-item">Version: 1.0.12</li>
-			<li class="collection-item">Web: <a href="http://www.oym.com.py/">www.oym.com.py</li>
+			<li class="collection-item">Web: <a href="http://www.oym.com.py/">www.oym.com.py</a></li>
 			<!-- Logotipo de la inmobiliaria -->
-			<li class="collection-item"><center><!-- <img src="assets/img/inmobicon.png"> --></center></li>
+			<li class="collection-item"><center><img src="assets/img/inmobicon.png"></center></li>
 		</ul>
   	</div>
 </div>
 
+<script type="text/javascript">
+	/*function initMapLote(){
+    
+    loteMapCenter = new google.maps.LatLng(-25.3112836,-57.6006347);
+    loteMapPropiedades = {
+        center: loteMapCenter, //-25.3112836,
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    map = new google.maps.Map(document.getElementById('boxMapLote'), loteMapPropiedades);
+    var marker = new google.maps.Marker({ position : loteMapCenter , icon : ""});
+    marker.setMap(map);
+    
+    
+    google.maps.event.addListener(marker,"click", function(){
+        infowindow = new google.maps.InfoWindow({
+           content: "OyM System Group" 
+        });
+        infowindow.open(map,marker);
+    });*/
 
+//}
+
+</script>
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV8eejIJf3r_CVFKsf090AB7F8H_wHJR4&callback=initMapLote" async defer></script> -->
 
 </body>
