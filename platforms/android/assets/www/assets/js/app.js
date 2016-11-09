@@ -2,6 +2,7 @@ window.onload = function(){
     document.addEventListener("deviceready", onDeviceReady, false);
 }
 
+
 function onDeviceReady(){
     if (!checkConnection()){
         alert("Por favor verifque su conexion a internet");
