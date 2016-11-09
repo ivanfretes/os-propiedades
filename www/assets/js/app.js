@@ -1111,6 +1111,7 @@ function htmlLoteDescription(lote){
     hText += "<tr><td>Norte:</td><td class=\"text-right\"> "+formatNumber(lote.longNorte.toString())+"</td></tr>";
     hText += "<tr><td>Sur:</td> <td class=\"text-right\">"+formatNumber(lote.longSur.toString())+"</td></tr>";
     hText += "<tr><td>Este:</td><td class=\"text-right\"> "+formatNumber(lote.longEste.toString())+"</td></tr>";
+    hText += "<tr><td>Oeste:</td><td class=\"text-right\"> "+formatNumber(lote.longOeste.toString())+"</td></tr>";
     hText += "</table></div>";
 
     $("#lote_descripcion").html("<ul>"+hText+"</ul>");
